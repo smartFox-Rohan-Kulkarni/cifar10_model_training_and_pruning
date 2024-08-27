@@ -2,6 +2,9 @@
 
 This project implements a Convolutional Neural Network (CNN) for the CIFAR-10 dataset, including model training, pruning, and evaluation.
 
+## Model Arch
+![](<diagrams/model_diagram.png> "model arch")
+
 ## Requirements
 
 - Python 3.10+
