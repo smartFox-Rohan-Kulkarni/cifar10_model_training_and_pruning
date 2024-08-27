@@ -11,13 +11,13 @@ class AdaptiveEnsemble(nn.Module):
         self.feature_extractor2 = EfficientNetExtractor()
 
         self.adaptive_pool = nn.AdaptiveAvgPool2d((1, 1))
-        
+
         # Adjust the combined_features size based on the output of EfficientNetExtractor
         with torch.no_grad():
             dummy_input = torch.randn(1, 3, 32, 32)
             dummy_output = self.feature_extractor1(dummy_input)
             combined_features = dummy_output.shape[1] * 2
-        
+
         self.fc = nn.Sequential(
             nn.Linear(combined_features, 512),
             nn.ReLU(),

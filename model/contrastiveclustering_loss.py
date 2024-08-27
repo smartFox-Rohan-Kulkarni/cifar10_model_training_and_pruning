@@ -10,15 +10,17 @@ class ContrastiveClusteringLoss(nn.Module):
 
     def forward(self, features, labels):
         batch_size = features.shape[0]
-        
+
         labels = labels.contiguous().view(-1, 1)
         mask = torch.eq(labels, labels.T).float().to(features.device)
 
-        contrast_feature = torch.cat([features, features], dim=0)  # Duplicate features for contrastive learning
+        contrast_feature = torch.cat(
+            [features, features], dim=0
+        )  # Duplicate features for contrastive learning
         anchor_feature = contrast_feature
         anchor_dot_contrast = torch.div(
-            torch.matmul(anchor_feature, contrast_feature.T),
-            self.temperature)
+            torch.matmul(anchor_feature, contrast_feature.T), self.temperature
+        )
 
         # For numerical stability
         logits_max, _ = torch.max(anchor_dot_contrast, dim=1, keepdim=True)
@@ -31,5 +33,5 @@ class ContrastiveClusteringLoss(nn.Module):
 
         # Mean of log-likelihood over positive samples
         loss = -torch.sum(mask * log_prob) / batch_size
-        
+
         return loss

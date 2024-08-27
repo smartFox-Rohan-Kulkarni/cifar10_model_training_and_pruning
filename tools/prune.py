@@ -1,22 +1,17 @@
-from model.adaptive_ensemble import AdaptiveEnsemble
 import torch
 import torch.nn.utils.prune as prune
 
+from model.adaptive_ensemble import AdaptiveEnsemble
 from utilites.logger import get_logger
 
 logging = get_logger()
 
-from config import (
-    DEVICE,
-    MODEL_PATH,
-    NC,
-    ORIGINAL_MODEL_NAME,
-    PRUNED_MODEL_NAME,
-    PRUNING_RATIOS,
-)
-from train import evaluate_model
 import os
 
+from train import evaluate_model
+
+from config import (DEVICE, MODEL_PATH, NC, ORIGINAL_MODEL_NAME,
+                    PRUNED_MODEL_NAME, PRUNING_RATIOS)
 from utilites.dataloader import get_data_loaders
 
 

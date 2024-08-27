@@ -1,15 +1,16 @@
-from model.adaptive_ensemble import AdaptiveEnsemble
-import torch
-import numpy as np
-
-from config import DEVICE, MODEL_PATH, NC, ORIGINAL_MODEL_NAME, PRUNED_MODEL_NAME
 import os
 
-from utilites.dataloader import get_data_loaders
+import numpy as np
+import torch
 
+from config import (DEVICE, MODEL_PATH, NC, ORIGINAL_MODEL_NAME,
+                    PRUNED_MODEL_NAME)
+from model.adaptive_ensemble import AdaptiveEnsemble
+from utilites.dataloader import get_data_loaders
 from utilites.logger import get_logger
 
 logging = get_logger()
+
 
 def evaluate_models():
     _, _, test_loader = get_data_loaders()

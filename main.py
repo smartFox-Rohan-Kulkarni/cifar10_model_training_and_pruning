@@ -5,6 +5,7 @@ from utilites.logger import get_logger
 
 logging = get_logger()
 
+
 def main():
     logging.info("Starting model training")
     train_model()
