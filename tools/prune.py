@@ -9,7 +9,7 @@ logging = get_logger()
 
 import os
 
-from train import evaluate, evaluate_model
+from tools.train import evaluate, evaluate_model
 
 from config import (DEVICE, MODEL_PATH, NC, ORIGINAL_MODEL_NAME,
                     PRUNED_MODEL_NAME, PRUNING_RATIOS)
