@@ -1,4 +1,5 @@
 import torch
+import torch.nn as nn
 import torch.nn.utils.prune as prune
 
 from model.adaptive_ensemble import AdaptiveEnsemble
@@ -8,7 +9,7 @@ logging = get_logger()
 
 import os
 
-from train import evaluate_model
+from train import evaluate, evaluate_model
 
 from config import (DEVICE, MODEL_PATH, NC, ORIGINAL_MODEL_NAME,
                     PRUNED_MODEL_NAME, PRUNING_RATIOS)
@@ -19,8 +20,11 @@ def prune_model():
     _, val_loader, _ = get_data_loaders()
     model = AdaptiveEnsemble(num_classes=NC, num_clusters=NC).to(DEVICE)
     model.load_state_dict(torch.load(os.path.join(MODEL_PATH, ORIGINAL_MODEL_NAME)))
-
-    original_accuracy = evaluate_model(model, val_loader)
+    classification_criterion = nn.CrossEntropyLoss()
+    
+    _, original_accuracy = evaluate(
+            model, val_loader, classification_criterion, DEVICE
+        )
     logging.info(f"Original model accuracy: {original_accuracy:.2f}%")
 
     best_pruned_model = None
@@ -29,7 +33,9 @@ def prune_model():
 
     for ratio in PRUNING_RATIOS:
         pruned_model = prune_layers(model, ratio)
-        pruned_accuracy = evaluate_model(pruned_model, val_loader)
+        _, pruned_accuracy = evaluate(
+            pruned_model, val_loader, classification_criterion, DEVICE
+        )
         logging.info(f"Pruned model accuracy (ratio {ratio}): {pruned_accuracy:.2f}%")
 
         if (

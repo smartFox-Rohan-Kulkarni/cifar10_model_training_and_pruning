@@ -6,4 +6,4 @@ logging.basicConfig(
 
 
 def get_logger():
-    return logging.Logger()
+    return logging.Logger("general")
