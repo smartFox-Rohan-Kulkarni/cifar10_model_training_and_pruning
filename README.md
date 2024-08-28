@@ -25,6 +25,7 @@ Install the required packages using: pip install -r extras/requirements.txt
 - `prune.py`: Implements model pruning techniques.
 - `evaluate.py`: Evaluates the original and pruned models.
 - `main.py`: Main script to run the entire pipeline.
+- `notebooks dir`: contains the notebook used to train and design the arch
 
 ## Usage
 
