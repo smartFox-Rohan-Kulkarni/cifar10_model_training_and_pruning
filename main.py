@@ -11,10 +11,10 @@ def main():
     train_model()
 
     logging.info("\nStarting model pruning")
-    prune_model()
+    best_pruning_ratio = prune_model()
 
     logging.info("\nEvaluating models")
-    evaluate_models()
+    evaluate_models(best_pruning_ratio)
 
 
 if __name__ == "__main__":

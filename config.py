@@ -12,4 +12,4 @@ MODEL_PATH = "./models"
 ORIGINAL_MODEL_NAME = "original_model.pth"
 PRUNED_MODEL_NAME = "pruned_model.pth"
 
-PRUNING_RATIOS = [0.5, 0.7]
+PRUNING_RATIOS = [0.5, 0.7, 0.8, 0.9, 0.95, 0.98, 0.989, 0.99]
